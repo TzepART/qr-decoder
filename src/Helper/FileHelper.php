@@ -8,7 +8,6 @@
 
 namespace App\Helper;
 
-
 /**
  * Class FileHelper
  * @package App\Helper
