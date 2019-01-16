@@ -28,6 +28,11 @@ class FileHelper
     private $workDir;
 
     /**
+     * @var string
+     */
+    private $workBlackAndWhiteDir;
+
+    /**
      * AppQrReader constructor.
      * @param string $workDir
      */
@@ -37,6 +42,8 @@ class FileHelper
         $this->files = array_values(array_filter(scandir($workDir),function ($elementName){
             return preg_match("/\.jpg|\.jpeg/",strtolower($elementName));
         }));
+
+        $this->workBlackAndWhiteDir = $this->makeBWDir();
     }
 
     /**
@@ -61,13 +68,8 @@ class FileHelper
      */
     public function toBlackAndWhite(string $file)
     {
-        $workBlackAndWhiteDir = $this->workDir.self::BLACK_AND_WHITE_DIR;
-        if(!is_dir($workBlackAndWhiteDir)){
-            mkdir($workBlackAndWhiteDir);
-        }
-
         $oldFile = $this->workDir.$file;
-        $newFile = $workBlackAndWhiteDir.'/'.$file;
+        $newFile = $this->workBlackAndWhiteDir.'/'.$file;
 
         $img = imagecreatefromjpeg($oldFile);
 
@@ -118,6 +120,19 @@ class FileHelper
         }
 
         return [$thumb_w, $thumb_h];
+    }
+
+    /**
+     * @return string
+     */
+    protected function makeBWDir(): string
+    {
+        $workBlackAndWhiteDir = $this->workDir . self::BLACK_AND_WHITE_DIR;
+        if (!is_dir($workBlackAndWhiteDir)) {
+            mkdir($workBlackAndWhiteDir);
+        }
+
+        return $workBlackAndWhiteDir;
     }
 
 }
