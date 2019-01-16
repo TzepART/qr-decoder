@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    },
+    "require": {
+        "khanamiryan/qrcode-detector-decoder": "^1.0"
+    },
+    "extra": {
+        "public-dir": "web"
+    }
+}
