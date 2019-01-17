@@ -14,8 +14,6 @@ namespace App\Helper;
  */
 class FileHelper
 {
-    const BLACK_AND_WHITE_DIR = "black_and_white";
-
     /**
      * @var array
      */
@@ -27,11 +25,6 @@ class FileHelper
     private $workDir;
 
     /**
-     * @var string
-     */
-    private $workBlackAndWhiteDir;
-
-    /**
      * AppQrReader constructor.
      * @param string $workDir
      */
@@ -41,8 +34,6 @@ class FileHelper
         $this->files = array_values(array_filter(scandir($workDir),function ($elementName){
             return preg_match("/\.jpg|\.jpeg/",strtolower($elementName));
         }));
-
-        $this->workBlackAndWhiteDir = $this->makeBWDir();
     }
 
     /**
@@ -62,33 +53,35 @@ class FileHelper
     }
 
     /**
-     * @param string $file
-     * @return string
+     * @param resource $oldResource
+     * @return resource
      */
-    public function toBlackAndWhite(string $file)
+    public function optimizeSize($oldResource)
     {
-        $oldFile = $this->workDir.$file;
-        $newFile = $this->workBlackAndWhiteDir.'/'.$file;
-
-        $img = imagecreatefromjpeg($oldFile);
-
-        $x = imagesx($img);
-        $y = imagesy($img);
+        $x = imagesx($oldResource);
+        $y = imagesy($oldResource);
 
         list($new_width, $new_height) = $this->getScalingSize($x,$y);
 
-        $s = imagecreatetruecolor($new_width, $new_height);
+        $newResource = imagecreatetruecolor($new_width, $new_height);
 
-        imagecopyresampled($s, $img, 0, 0, 0, 0, $new_width, $new_height,
+        imagecopyresampled($newResource, $oldResource, 0, 0, 0, 0, $new_width, $new_height,
             $x, $y);
 
-        imagefilter($s, IMG_FILTER_GRAYSCALE);
-        imagejpeg($s, $newFile);
-        imagedestroy($s);
-        imagedestroy($img);
+        imagedestroy($oldResource);
 
-        return $newFile;
+        return $newResource;
 
+    }
+
+    /**
+     * @param resource $resource
+     * @return resource
+     */
+    public function toBlackAndWhite($resource)
+    {
+        imagefilter($resource, IMG_FILTER_GRAYSCALE);
+        return $resource;
     }
 
     /**
@@ -119,19 +112,6 @@ class FileHelper
         }
 
         return [$thumb_w, $thumb_h];
-    }
-
-    /**
-     * @return string
-     */
-    protected function makeBWDir(): string
-    {
-        $workBlackAndWhiteDir = $this->workDir . self::BLACK_AND_WHITE_DIR;
-        if (!is_dir($workBlackAndWhiteDir)) {
-            mkdir($workBlackAndWhiteDir);
-        }
-
-        return $workBlackAndWhiteDir;
     }
 
 }
