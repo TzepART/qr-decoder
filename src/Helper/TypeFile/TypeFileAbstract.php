@@ -9,6 +9,10 @@
 namespace App\Helper\TypeFile;
 
 
+/**
+ * Class TypeFileAbstract
+ * @package App\Helper\TypeFile
+ */
 abstract class TypeFileAbstract implements TypeFileInterface
 {
     /**

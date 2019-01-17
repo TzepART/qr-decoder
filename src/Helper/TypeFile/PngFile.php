@@ -9,6 +9,10 @@
 namespace App\Helper\TypeFile;
 
 
+/**
+ * Class PngFile
+ * @package App\Helper\TypeFile
+ */
 class PngFile extends TypeFileAbstract
 {
 
