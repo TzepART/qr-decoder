@@ -36,39 +36,21 @@ class AppQrReader
      * @param bool $optimizeSize
      * @return array
      */
-    public function getResult($optimizeSize = true)
+    public function getResults($optimizeSize = true)
     {
         $results = [];
-        foreach ($this->fileHelper->getFiles() as $file) {
-            $path = $this->fileHelper->getWorkDir().$file;
-            //create resource
-            $img = $this->getFileResource($path);
 
-            try {
-                if($optimizeSize){
-                    $img = $this->fileHelper->optimizeSize($img);
-                }
-                $qrcode = new QrReader($img, QrReader::SOURCE_TYPE_RESOURCE, false);
-                $results[$path] = $qrcode->text(); //return decoded text from QR Code
-            } catch (\Exception $exception) {
-                $results[$path] = $exception->getMessage();
-                imagedestroy($img);
+        try {
+            foreach ($this->fileHelper->getFileResources($optimizeSize) as $fileResource) {
+                $qrcode = new QrReader($fileResource, QrReader::SOURCE_TYPE_RESOURCE, false);
+                $results[] = $qrcode->text(); //return decoded text from QR Code
+                imagedestroy($fileResource);
+//                echo memory_get_usage() . PHP_EOL;
             }
-
-            echo memory_get_usage() . PHP_EOL;
+        } catch (\Exception $exception) {
+            $results[] = $exception->getMessage();
         }
 
         return $results;
-    }
-
-    /**
-     * @param $path
-     * @return resource
-     */
-    protected function getFileResource(string $path)
-    {
-        //TODO make validation and choose type
-        $img = imagecreatefromjpeg($path);
-        return $img;
     }
 }

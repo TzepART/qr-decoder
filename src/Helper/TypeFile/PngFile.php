@@ -6,13 +6,10 @@
  * Time: 16:44
  */
 
-namespace App\Helper;
+namespace App\Helper\TypeFile;
 
 
-class PngFile implements TypeFileInterface
+class PngFile extends TypeFileAbstract
 {
-    public function toBlackAndWhite(string $oldPath, string $newPath): void
-    {
-        // TODO: Implement toBlackAndWhite() method.
-    }
+
 }

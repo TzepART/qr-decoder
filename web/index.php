@@ -13,8 +13,10 @@ use \App\Helper\FileHelper;
 use \App\AppQrReader;
 
 
-$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/good_data/";
+//$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/data_png/";
+//$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/good_data/";
+$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/data/";
 
 $fileHelper = new FileHelper($dataDir);
-$results = (new AppQrReader($fileHelper))->getResult();
+$results = (new AppQrReader($fileHelper))->getResults();
 var_dump($results);

@@ -6,7 +6,7 @@
  * Time: 16:35
  */
 
-namespace App\Helper;
+namespace App\Helper\TypeFile;
 
 
 /**
@@ -16,8 +16,14 @@ namespace App\Helper;
 interface TypeFileInterface
 {
     /**
-     * @param string $oldPath
-     * @param string $newPath
+     * @param resource $oldResource
+     * @return resource
      */
-    public function toBlackAndWhite(string $oldPath, string $newPath) : void;
+    public function optimizeSize($oldResource);
+
+    /**
+     * @param resource $resource
+     * @return resource
+     */
+    public function toBlackAndWhite($resource);
 }

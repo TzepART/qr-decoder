@@ -8,6 +8,10 @@
 
 namespace App\Helper;
 
+use App\Helper\TypeFile\JpegFile;
+use App\Helper\TypeFile\PngFile;
+use App\Helper\TypeFile\TypeFileInterface;
+
 /**
  * Class FileHelper
  * @package App\Helper
@@ -24,6 +28,7 @@ class FileHelper
      */
     private $workDir;
 
+
     /**
      * AppQrReader constructor.
      * @param string $workDir
@@ -32,7 +37,7 @@ class FileHelper
     {
         $this->workDir = $workDir;
         $this->files = array_values(array_filter(scandir($workDir),function ($elementName){
-            return preg_match("/\.jpg|\.jpeg/",strtolower($elementName));
+            return preg_match("/\.jpg|\.jpeg|\.png/",strtolower($elementName));
         }));
     }
 
@@ -53,65 +58,44 @@ class FileHelper
     }
 
     /**
-     * @param resource $oldResource
-     * @return resource
+     * @param bool $optimizeSize
+     * @return \Generator
+     * @throws \Exception
      */
-    public function optimizeSize($oldResource)
+    public function getFileResources($optimizeSize = true)
     {
-        $x = imagesx($oldResource);
-        $y = imagesy($oldResource);
-
-        list($new_width, $new_height) = $this->getScalingSize($x,$y);
-
-        $newResource = imagecreatetruecolor($new_width, $new_height);
-
-        imagecopyresampled($newResource, $oldResource, 0, 0, 0, 0, $new_width, $new_height,
-            $x, $y);
-
-        imagedestroy($oldResource);
-
-        return $newResource;
-
+        foreach ($this->getFiles() as $file) {
+            $path = $this->getWorkDir().$file;
+            //create resource
+            /** @var TypeFileInterface $fileHelper */
+            list($resource,$fileHelper) = $this->initTypeFile($path);
+            if($optimizeSize){
+                $resource = $fileHelper->optimizeSize($resource);
+            }
+            yield $resource;
+        }
     }
 
     /**
-     * @param resource $resource
-     * @return resource
-     */
-    public function toBlackAndWhite($resource)
-    {
-        imagefilter($resource, IMG_FILTER_GRAYSCALE);
-        return $resource;
-    }
-
-    /**
-     * @param int $old_x
-     * @param int $old_y
-     * @param int $new_width
-     * @param int $new_height
+     * @param $path
      * @return array
+     * @throws \Exception
      */
-    protected function getScalingSize(int $old_x, int $old_y, int $new_width = 800, int $new_height = 800)
+    protected function initTypeFile(string $path) : array
     {
-        $thumb_w = 0;
-        $thumb_h = 0;
+        //TODO make validation
+        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
-        if ($old_x > $old_y) {
-            $thumb_w = $new_width;
-            $thumb_h = $old_y * ($new_height / $old_x);
+        if($ext == "png"){
+            $resource = imagecreatefrompng($path);
+            $fileHelper = new PngFile();
+        }elseif (preg_match("/jpg|jpeg/",$ext)){
+            $resource = imagecreatefromjpeg($path);
+            $fileHelper = new JpegFile();
+        }else{
+            throw new \Exception("Unknown file type");
         }
 
-        if ($old_x < $old_y) {
-            $thumb_w = $old_x * ($new_width / $old_y);
-            $thumb_h = $new_height;
-        }
-
-        if ($old_x == $old_y) {
-            $thumb_w = $new_width;
-            $thumb_h = $new_height;
-        }
-
-        return [$thumb_w, $thumb_h];
+        return [$resource,$fileHelper];
     }
-
 }
