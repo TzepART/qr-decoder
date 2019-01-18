@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * Created by PhpStorm.
@@ -12,10 +13,8 @@ require __DIR__ . "/../vendor/autoload.php";
 use \App\Helper\FileHelper;
 use \App\AppQrReader;
 
-
-//$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/data_png/";
-//$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/good_data/";
-$dataDir = "/Users/artem/PhpstormProjects/qr_decoder/web/data/";
+$dataDir = (new \App\Helper\ConsoleHelper())->getDirOption();
+$dataPath = __DIR__."/../".$dataDir;
 
 $fileHelper = new FileHelper($dataDir);
 $results = (new AppQrReader($fileHelper))->getResults();
