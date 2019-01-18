@@ -12,10 +12,16 @@ require __DIR__ . "/../vendor/autoload.php";
 
 use \App\Helper\FileHelper;
 use \App\AppQrReader;
+use \App\Helper\ConsoleHelper;
 
-$dataDir = (new \App\Helper\ConsoleHelper())->getDirOption();
-$dataPath = __DIR__."/../".$dataDir;
 
-$fileHelper = new FileHelper($dataDir);
-$results = (new AppQrReader($fileHelper))->getResults();
-var_dump($results);
+//TODO add try-catch for case when --dir does not set
+$consoleHelper = new ConsoleHelper();
+$dataPath = __DIR__."/../".$consoleHelper->getDirOption();
+
+if(is_dir($dataPath)){
+    $fileHelper = new FileHelper($dataPath);
+    $results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
+    var_dump($results);
+}
+
