@@ -14,14 +14,14 @@ use \App\Helper\FileHelper;
 use \App\AppQrReader;
 use \App\Helper\ConsoleHelper;
 
+$basePath = __DIR__."/../";
 
 //TODO add try-catch for case when --dir does not set
 $consoleHelper = new ConsoleHelper();
-$dataPath = __DIR__."/../".$consoleHelper->getDirOption();
+$dataPath = $basePath.$consoleHelper->getPathOption();
 
-if(is_dir($dataPath)){
-    $fileHelper = new FileHelper($dataPath);
-    $results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
-    var_dump($results);
-}
+
+$fileHelper = new FileHelper($dataPath);
+$results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
+var_dump($results);
 

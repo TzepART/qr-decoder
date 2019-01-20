@@ -19,7 +19,7 @@ class ConsoleHelper
      * @var array
      */
     protected $optionFlags = [
-        "dir:", // Requires values
+        "path:", // Requires values
         "compress::", // No requires values
     ];
 
@@ -39,15 +39,15 @@ class ConsoleHelper
     /**
      * @return string
      */
-    public function getDirOption() : string
+    public function getPathOption() : string
     {
-        $dataDir = "";
+        $dataPath = "";
 
-        if($this->options["dir"] && is_dir($this->options["dir"])){
-            $dataDir = $this->options["dir"];
+        if(isset($this->options["path"]) && $this->options["path"]){
+            $dataPath = $this->options["path"];
         }
 
-        return $dataDir;
+        return $dataPath;
     }
 
     /**

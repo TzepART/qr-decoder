@@ -26,19 +26,31 @@ class FileHelper
     /**
      * @var string
      */
-    private $workDir;
+    private $workPath;
 
 
     /**
      * AppQrReader constructor.
-     * @param string $workDir
+     * @param string $workPath
      */
-    public function __construct(string $workDir)
+    public function __construct(string $workPath)
     {
-        $this->workDir = $workDir;
-        $this->files = array_values(array_filter(scandir($workDir),function ($elementName){
-            return preg_match("/\.jpg|\.jpeg|\.png/",strtolower($elementName));
-        }));
+        $this->workPath = $workPath;
+
+        if(is_dir($this->workPath)){
+
+            $tmpFiles = array_values(array_filter(scandir($this->workPath),function ($elementName){
+                return preg_match("/\.jpg|\.jpeg|\.png/",strtolower($elementName));
+            }));
+            array_walk($tmpFiles, function (&$value) {
+                $value = $this->workPath.$value;
+            });
+            $this->files = $tmpFiles;
+
+        }elseif (is_file($this->workPath)){
+            $this->files[] = $this->workPath;
+        }
+
     }
 
     /**
@@ -52,9 +64,9 @@ class FileHelper
     /**
      * @return string
      */
-    public function getWorkDir(): string
+    public function getWorkPath(): string
     {
-        return $this->workDir;
+        return $this->workPath;
     }
 
     /**
@@ -64,11 +76,10 @@ class FileHelper
      */
     public function getFileResources($optimizeSize = true)
     {
-        foreach ($this->getFiles() as $file) {
-            $path = $this->getWorkDir().$file;
+        foreach ($this->getFiles() as $filePath) {
             //create resource
             /** @var TypeFileInterface $fileHelper */
-            list($resource,$fileHelper) = $this->initTypeFile($path);
+            list($resource,$fileHelper) = $this->initTypeFile($filePath);
             if($optimizeSize){
                 $resource = $fileHelper->optimizeSize($resource);
             }
