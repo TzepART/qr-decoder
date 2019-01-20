@@ -34,8 +34,6 @@ class ConsoleHelper
     public function __construct()
     {
         $this->options = getopt("",$this->optionFlags);
-        var_dump($this->options);
-        die();
     }
 
     /**

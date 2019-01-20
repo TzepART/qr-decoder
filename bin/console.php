@@ -20,9 +20,8 @@ $basePath = __DIR__."/../";
 $consoleHelper = new ConsoleHelper();
 $dataPath = $basePath.$consoleHelper->getPathOption();
 
-if(is_dir($dataPath)){
-    $fileHelper = new FileHelper($dataPath);
-    $results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
-    var_dump($results);
-}
+
+$fileHelper = new FileHelper($dataPath);
+$results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
+var_dump($results);
 

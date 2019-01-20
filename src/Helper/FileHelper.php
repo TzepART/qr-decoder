@@ -38,9 +38,15 @@ class FileHelper
         $this->workPath = $workPath;
 
         if(is_dir($this->workPath)){
-            $this->files = array_values(array_filter(scandir($workPath),function ($elementName){
+
+            $tmpFiles = array_values(array_filter(scandir($this->workPath),function ($elementName){
                 return preg_match("/\.jpg|\.jpeg|\.png/",strtolower($elementName));
             }));
+            array_walk($tmpFiles, function (&$value) {
+                $value = $this->workPath.$value;
+            });
+            $this->files = $tmpFiles;
+
         }elseif (is_file($this->workPath)){
             $this->files[] = $this->workPath;
         }
