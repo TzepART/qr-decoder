@@ -6,12 +6,12 @@
  * Time: 16:36
  */
 
-namespace App\Helper\TypeFile;
+namespace DecoderQR\Helper\TypeFile;
 
 
 /**
  * Class JpegFile
- * @package App\Helper\TypeFile
+ * @package DecoderQR\Helper\TypeFile
  */
 class JpegFile extends TypeFileAbstract
 {

@@ -10,9 +10,9 @@
 require __DIR__ . "/../vendor/autoload.php";
 //ini_set('memory_limit','-1');
 
-use \App\Helper\FileHelper;
-use \App\AppQrReader;
-use \App\Helper\ConsoleHelper;
+use \DecoderQR\Helper\ConsoleFileHelper;
+use \DecoderQR\DecoderQR;
+use \DecoderQR\Helper\ConsoleHelper;
 
 $basePath = __DIR__."/../";
 
@@ -21,7 +21,7 @@ $consoleHelper = new ConsoleHelper();
 $dataPath = $basePath.$consoleHelper->getPathOption();
 
 
-$fileHelper = new FileHelper($dataPath);
-$results = (new AppQrReader($fileHelper))->getResults($consoleHelper->getCompressOption());
+$fileHelper = new ConsoleFileHelper($dataPath);
+$results = (new DecoderQR($fileHelper))->getResults($consoleHelper->getCompressOption());
 var_dump($results);
 

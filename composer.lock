@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bcbdd3dbcf2e13f6763c71242533805",
+    "content-hash": "af628d7a6ae224aeafdea53ead084536",
     "packages": [
         {
             "name": "khanamiryan/qrcode-detector-decoder",
@@ -63,6 +63,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-gd": "*"
+    },
     "platform-dev": []
 }

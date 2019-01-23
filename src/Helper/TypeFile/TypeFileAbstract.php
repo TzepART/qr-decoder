@@ -6,12 +6,12 @@
  * Time: 17:45
  */
 
-namespace App\Helper\TypeFile;
+namespace DecoderQR\Helper\TypeFile;
 
 
 /**
  * Class TypeFileAbstract
- * @package App\Helper\TypeFile
+ * @package DecoderQR\Helper\TypeFile
  */
 abstract class TypeFileAbstract implements TypeFileInterface
 {

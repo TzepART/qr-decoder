@@ -6,12 +6,12 @@
  * Time: 16:35
  */
 
-namespace App\Helper\TypeFile;
+namespace DecoderQR\Helper\TypeFile;
 
 
 /**
  * Interface TypeFileInterface
- * @package App\Helper
+ * @package DecoderQR\Helper
  */
 interface TypeFileInterface
 {
