@@ -8,26 +8,26 @@
 
 namespace DecoderQR;
 
-use DecoderQR\Helper\FileHelper;
+use DecoderQR\Helper\FileHelperInterface;
 use Zxing\QrReader;
 
 
 /**
  * Class AppQrReader
- * @package App
+ * @package DecoderQR
  */
 class AppQrReader
 {
     /**
-     * @var FileHelper
+     * @var FileHelperInterface
      */
     private $fileHelper;
 
     /**
      * AppQrReader constructor.
-     * @param FileHelper $fileHelper
+     * @param FileHelperInterface $fileHelper
      */
-    public function __construct(FileHelper $fileHelper)
+    public function __construct(FileHelperInterface $fileHelper)
     {
         $this->fileHelper = $fileHelper;
     }
