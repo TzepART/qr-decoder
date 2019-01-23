@@ -13,10 +13,10 @@ use Zxing\QrReader;
 
 
 /**
- * Class AppQrReader
+ * Class DecoderQR
  * @package DecoderQR
  */
-class AppQrReader
+class DecoderQR
 {
     /**
      * @var FileHelperInterface
@@ -24,7 +24,7 @@ class AppQrReader
     private $fileHelper;
 
     /**
-     * AppQrReader constructor.
+     * DecoderQR constructor.
      * @param FileHelperInterface $fileHelper
      */
     public function __construct(FileHelperInterface $fileHelper)

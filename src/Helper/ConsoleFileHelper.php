@@ -31,7 +31,7 @@ class ConsoleFileHelper implements FileHelperInterface
 
 
     /**
-     * AppQrReader constructor.
+     * DecoderQR constructor.
      * @param string $workPath
      */
     public function __construct(string $workPath)
