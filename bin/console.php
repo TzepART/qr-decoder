@@ -10,9 +10,9 @@
 require __DIR__ . "/../vendor/autoload.php";
 //ini_set('memory_limit','-1');
 
-use \App\Helper\FileHelper;
-use \App\AppQrReader;
-use \App\Helper\ConsoleHelper;
+use \DecoderQR\Helper\FileHelper;
+use \DecoderQR\AppQrReader;
+use \DecoderQR\Helper\ConsoleHelper;
 
 $basePath = __DIR__."/../";
 

@@ -6,12 +6,12 @@
  * Time: 16:21
  */
 
-namespace App\Helper;
+namespace DecoderQR\Helper;
 
 
 /**
  * Class ConsoleHelper
- * @package App\Helper
+ * @package DecoderQR\Helper
  */
 class ConsoleHelper
 {

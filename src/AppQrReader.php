@@ -6,9 +6,9 @@
  * Time: 13:29
  */
 
-namespace App;
+namespace DecoderQR;
 
-use App\Helper\FileHelper;
+use DecoderQR\Helper\FileHelper;
 use Zxing\QrReader;
 
 

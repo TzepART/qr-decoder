@@ -6,15 +6,15 @@
  * Time: 18:58
  */
 
-namespace App\Helper;
+namespace DecoderQR\Helper;
 
-use App\Helper\TypeFile\JpegFile;
-use App\Helper\TypeFile\PngFile;
-use App\Helper\TypeFile\TypeFileInterface;
+use DecoderQR\Helper\TypeFile\JpegFile;
+use DecoderQR\Helper\TypeFile\PngFile;
+use DecoderQR\Helper\TypeFile\TypeFileInterface;
 
 /**
  * Class FileHelper
- * @package App\Helper
+ * @package DecoderQR\Helper
  */
 class FileHelper
 {
