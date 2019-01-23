@@ -17,16 +17,15 @@ Example console command for precompression for separate file:
 Example Using without console command
 
 ```php
-    <?php
-    
-    use \DecoderQR\Helper\FileHelper;
-    use DecoderQR\DecoderQR;
-    
-    
-    $dataPath = '/path/to/decoder/file.png';
-    $compressFlag = true;
-    
-    $fileHelper = new FileHelper($dataPath);
-    $results = (new DecoderQR($fileHelper))->getResults($compressFlag);
-    var_dump($results); //output decoding results
+<?php
+
+use \DecoderQR\Helper\FileHelper;
+use DecoderQR\DecoderQR;
+
+$dataPath = '/path/to/decoder/file.png';
+$compressFlag = true;
+
+$fileHelper = new FileHelper($dataPath);
+$results = (new DecoderQR($fileHelper))->getResults($compressFlag);
+var_dump($results); //output decoding results
 ```
