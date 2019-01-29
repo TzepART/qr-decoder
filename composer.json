@@ -1,4 +1,19 @@
 {
+    "name": "tzepart/qr_decoder",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/TzepART/qr_decoder.git",
+    "description": "This is QR decoder on base this QR-decoder with function of precompression.",
+    "keywords": [
+        "QR",
+        "decoder"
+    ],
+    "authors": [
+        {
+            "name": "Tsepkov Artem",
+            "email": "tzepart@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {"DecoderQR\\": "src/"}
     },
