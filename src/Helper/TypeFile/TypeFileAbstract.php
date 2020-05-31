@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 17/01/2019
- * Time: 17:45
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper\TypeFile;
-
 
 /**
  * Class TypeFileAbstract
@@ -24,7 +18,7 @@ abstract class TypeFileAbstract implements TypeFileInterface
         $x = imagesx($oldResource);
         $y = imagesy($oldResource);
 
-        list($new_width, $new_height) = $this->getScalingSize($x,$y);
+        list($new_width, $new_height) = $this->getScalingSize($x, $y);
 
         $newResource = imagecreatetruecolor($new_width, $new_height);
 
@@ -54,7 +48,7 @@ abstract class TypeFileAbstract implements TypeFileInterface
      * @param int $new_height
      * @return array
      */
-    protected function getScalingSize(int $old_x, int $old_y, int $new_width = 800, int $new_height = 800)
+    protected function getScalingSize(int $old_x, int $old_y, int $new_width = 800, int $new_height = 800): array
     {
         $thumb_w = 0;
         $thumb_h = 0;
@@ -74,6 +68,6 @@ abstract class TypeFileAbstract implements TypeFileInterface
             $thumb_h = $new_height;
         }
 
-        return [$thumb_w, $thumb_h];
+        return [(int)$thumb_w, (int)$thumb_h];
     }
 }

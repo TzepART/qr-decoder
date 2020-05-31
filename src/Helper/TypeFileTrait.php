@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 2019-01-23
- * Time: 17:46
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper;
-
 
 use DecoderQR\Helper\TypeFile\JpegFile;
 use DecoderQR\Helper\TypeFile\PngFile;
@@ -23,21 +17,21 @@ trait TypeFileTrait
      * @return array
      * @throws \Exception
      */
-    protected function initTypeFile(string $path) : array
+    protected function initTypeFile(string $path): array
     {
         //TODO make validation
         $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
-        if($ext == "png"){
+        if ($ext == "png") {
             $resource = imagecreatefrompng($path);
             $fileHelper = new PngFile();
-        }elseif (preg_match("/jpg|jpeg/",$ext)){
+        } elseif (preg_match("/jpg|jpeg/", $ext)) {
             $resource = imagecreatefromjpeg($path);
             $fileHelper = new JpegFile();
-        }else{
+        } else {
             throw new \Exception("Unknown file type");
         }
 
-        return [$resource,$fileHelper];
+        return [$resource, $fileHelper];
     }
 }

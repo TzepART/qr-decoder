@@ -2,7 +2,7 @@
     "name": "tzepart/qr_decoder",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/TzepART/qr_decoder.git",
+    "homepage": "https://github.com/TzepART/qr-decoder.git",
     "description": "This is QR decoder on base this QR-decoder with function of precompression.",
     "keywords": [
         "QR",
@@ -18,6 +18,7 @@
         "psr-4": {"DecoderQR\\": "src/"}
     },
     "require": {
+        "php": ">=7.1",
         "khanamiryan/qrcode-detector-decoder": "^1.0",
         "ext-gd": "*"
     },

@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 16/01/2019
- * Time: 13:29
- */
+declare(strict_types=1);
 
 namespace DecoderQR;
 
 use DecoderQR\Helper\FileHelperInterface;
 use Zxing\QrReader;
-
 
 /**
  * Class DecoderQR
@@ -36,7 +30,7 @@ class DecoderQR
      * @param bool $optimizeSize
      * @return array
      */
-    public function getResults($optimizeSize = true)
+    public function getResults($optimizeSize = true): array
     {
         $results = [];
 

@@ -1,14 +1,8 @@
 #!/usr/bin/env php
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 16/01/2019
- * Time: 13:31
- */
+declare(strict_types=1);
 
 require __DIR__ . "/../vendor/autoload.php";
-//ini_set('memory_limit','-1');
 
 use \DecoderQR\Helper\ConsoleFileHelper;
 use \DecoderQR\DecoderQR;
@@ -24,4 +18,3 @@ $dataPath = $basePath.$consoleHelper->getPathOption();
 $fileHelper = new ConsoleFileHelper($dataPath);
 $results = (new DecoderQR($fileHelper))->getResults($consoleHelper->getCompressOption());
 var_dump($results);
-

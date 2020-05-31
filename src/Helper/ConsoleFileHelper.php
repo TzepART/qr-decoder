@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 16/01/2019
- * Time: 18:58
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper;
 
@@ -38,17 +33,17 @@ class ConsoleFileHelper implements FileHelperInterface
     {
         $this->workPath = $workPath;
 
-        if(is_dir($this->workPath)){
+        if (is_dir($this->workPath)) {
 
-            $tmpFiles = array_values(array_filter(scandir($this->workPath),function ($elementName){
-                return preg_match("/\.jpg|\.jpeg|\.png/",strtolower($elementName));
+            $tmpFiles = array_values(array_filter(scandir($this->workPath), function ($elementName) {
+                return preg_match("/\.jpg|\.jpeg|\.png/", strtolower($elementName));
             }));
             array_walk($tmpFiles, function (&$value) {
-                $value = $this->workPath.$value;
+                $value = $this->workPath . $value;
             });
             $this->files = $tmpFiles;
 
-        }elseif (is_file($this->workPath)){
+        } elseif (is_file($this->workPath)) {
             $this->files[] = $this->workPath;
         }
 
@@ -75,13 +70,13 @@ class ConsoleFileHelper implements FileHelperInterface
      * @return \Generator
      * @throws \Exception
      */
-    public function getFileResources($optimizeSize = true) : \Generator
+    public function getFileResources($optimizeSize = true): \Generator
     {
         foreach ($this->getFiles() as $filePath) {
             //create resource
             /** @var TypeFileInterface $fileHelper */
-            list($resource,$fileHelper) = $this->initTypeFile($filePath);
-            if($optimizeSize){
+            list($resource, $fileHelper) = $this->initTypeFile($filePath);
+            if ($optimizeSize) {
                 $resource = $fileHelper->optimizeSize($resource);
             }
             yield $resource;

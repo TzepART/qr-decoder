@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 18/01/2019
- * Time: 16:21
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper;
-
 
 /**
  * Class ConsoleHelper
@@ -33,17 +27,17 @@ class ConsoleHelper
      */
     public function __construct()
     {
-        $this->options = getopt("",$this->optionFlags);
+        $this->options = getopt("", $this->optionFlags);
     }
 
     /**
      * @return string
      */
-    public function getPathOption() : string
+    public function getPathOption(): string
     {
         $dataPath = "";
 
-        if(isset($this->options["path"]) && $this->options["path"]){
+        if (isset($this->options["path"]) && $this->options["path"]) {
             $dataPath = $this->options["path"];
         }
 
@@ -53,11 +47,11 @@ class ConsoleHelper
     /**
      * @return bool
      */
-    public function getCompressOption() : bool
+    public function getCompressOption(): bool
     {
         $compress = false;
 
-        if(isset($this->options["compress"]) && $this->options["compress"] === "yes"){
+        if (isset($this->options["compress"]) && $this->options["compress"] === "yes") {
             $compress = true;
         }
 

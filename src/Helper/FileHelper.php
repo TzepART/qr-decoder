@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 2019-01-23
- * Time: 17:42
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper;
-
 
 use DecoderQR\Helper\TypeFile\TypeFileInterface;
 
@@ -39,13 +33,13 @@ class FileHelper implements FileHelperInterface
      * @return \Generator
      * @throws \Exception
      */
-    public function getFileResources($optimizeSize = true) : \Generator
+    public function getFileResources($optimizeSize = true): \Generator
     {
         //create resource
         /** @var TypeFileInterface $fileHelper */
-        list($resource,$fileHelper) = $this->initTypeFile($this->filePath);
+        list($resource, $fileHelper) = $this->initTypeFile($this->filePath);
 
-        if($optimizeSize){
+        if ($optimizeSize) {
             $resource = $fileHelper->optimizeSize($resource);
         }
 

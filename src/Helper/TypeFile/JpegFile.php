@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 17/01/2019
- * Time: 16:36
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper\TypeFile;
 

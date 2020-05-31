@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artem
- * Date: 2019-01-23
- * Time: 17:39
- */
+declare(strict_types=1);
 
 namespace DecoderQR\Helper;
-
 
 /**
  * Interface FileHelperInterface
